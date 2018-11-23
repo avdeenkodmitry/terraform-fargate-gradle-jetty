@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '0.9.12'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.2'
+}
+
+sourceCompatibility = 1.8
+mainClassName = 'com.davdeenko.jersey.JerseyApplication'
+
+ext {
+    slf4jVersion = '1.7.25'
+    jettyVersion = '9.4.6.v20170531'
+    jerseyVersion = '2.27'
+}
+
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:slf4j-simple:${slf4jVersion}"
+
+    compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
+
+    compile "org.glassfish.jersey.core:jersey-server:${jerseyVersion}"
+    compile "org.glassfish.jersey.containers:jersey-container-servlet-core:${jerseyVersion}"
+    compile "org.glassfish.jersey.containers:jersey-container-jetty-http:${jerseyVersion}"
+    compile "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
+    compile "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+}
+
+jib.to.image = '754745079939.dkr.ecr.us-east-1.amazonaws.com/myapp'
+
